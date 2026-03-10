@@ -1,23 +1,26 @@
-MCU=atmega328p
-F_CPU=16000000UL
-CC=avr-gcc
-CFLAGS=-mmcu=$(MCU) -Os -DF_CPU=$(F_CPU)
-OBJ=main
+MCU = atmega328p
+F_CPU = 16000000UL
+CC = avr-gcc
+CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=$(F_CPU)
+OBJ = main spi nrf24l01      # Add all your .c files here (without extension)
 
+# Automatically convert .c to .o
+OBJ_FILES = $(OBJ:=.o)
 
+# Default target
+all: $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o main.elf $(OBJ_FILES)
+	avr-objcopy -O ihex -R .eeprom main.elf main.hex
 
-all:
-	$(CC) $(CFLAGS) -o $(OBJ).elf $(OBJ).c
-	avr-objcopy -O ihex -R .eeprom $(OBJ).elf $(OBJ).hex
+# Compile .c files to .o
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-
-flash: 
-	avrdude -c arduino -p m328p -P /dev/ttyUSB0 -b 115200 -D -U flash:w:$(OBJ).hex:i
-
+flash: all
+	avrdude -c arduino -p m328p -P /dev/ttyUSB0 -b 115200 -D -U flash:w:main.hex:i
 
 clean:
-	rm -f *.elf *.hex 
+	rm -f *.o *.elf *.hex
 
-#Change depending on the system you are flashing from 
 monitor:
 	screen /dev/ttyUSB0 9600
