@@ -1,4 +1,0 @@
-note i havent configfured the ce and csn i will upload the scirpt later but rn need to check if it sending out and recieveing data
-
-
-
