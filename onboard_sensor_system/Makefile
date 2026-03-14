@@ -2,17 +2,13 @@ MCU = atmega328p
 F_CPU = 16000000UL
 CC = avr-gcc
 CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=$(F_CPU)
-OBJ = main spi nrf24l01      # Add all your .c files here (without extension)
-
-# Automatically convert .c to .o
+OBJ = main spi nrf24l01      
 OBJ_FILES = $(OBJ:=.o)
 
-# Default target
 all: $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o main.elf $(OBJ_FILES)
 	avr-objcopy -O ihex -R .eeprom main.elf main.hex
 
-# Compile .c files to .o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
