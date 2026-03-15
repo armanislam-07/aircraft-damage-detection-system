@@ -32,14 +32,14 @@ int main()
     uart_init();
     stdout = &uart_output;   
 
-    nrf24_device(RECEIVER, RESET);     // initialize as receiver
+    nrf24_device(RECEIVER, RESET); // initialize as receiver
 
-    nrf24_rf_power(6);                 // same power (not critical but fine)
-    nrf24_rf_channel(40);              // must match transmitter
+    nrf24_rf_power(6);  // same power mode
+    nrf24_rf_channel(40); // must match transmitter
 
     nrf24_datapipe_address_configuration();  // load RX addresses
-    nrf24_datapipe_enable(1);                // enable pipe 0
-    nrf24_prx_static_payload_width(1,1);
+    nrf24_datapipe_enable(1); // enable pipe 0
+    nrf24_prx_static_payload_width(1,1); //Initializes payload with (to be changed once we finally know resistance precision)
     delay_function(100); 
     while(1)
     {
