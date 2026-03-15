@@ -2,7 +2,7 @@ MCU = atmega328p
 F_CPU = 16000000UL
 CC = avr-gcc
 CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=$(F_CPU)
-OBJ = main spi nrf24l01      
+OBJ = main drivers/spi drivers/nrf24l01
 
 OBJ_FILES = $(OBJ:=.o)
 

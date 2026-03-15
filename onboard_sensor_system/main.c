@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "nrf24l01.h"
+#include "drivers/nrf24l01.h"
+#include "drivers/ina226.h"
 
 
 int main(void)
@@ -11,7 +12,6 @@ int main(void)
     nrf24_flush(TX_BUFFER);
     uint8_t data = 1;
     nrf24_prx_static_payload_width(1,1);
-
 
     while(1)
     {

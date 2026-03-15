@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "nrf24l01.h"
+#include "drivers/nrf24l01.h"
 #include <avr/io.h>
 
 #define F_CPU 16000000UL
