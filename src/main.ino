@@ -55,7 +55,7 @@ void loop() {
       res = -1;
     }
 
-    String msg = "Resistance:\t" + String(res, 3) + "\tVoltage:\t" + String(bv, 3) + "\tCurrent:\t" + String(cu, 3);
+    String msg = "R:" + String(res, 3) + ",V:" + String(bv, 3) + ",I:" + String(cu, 3);
 
     bleuart.print(msg); // Send over BLE
     bleuart.println();
