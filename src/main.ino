@@ -6,7 +6,13 @@ BLEUart bleuart;
 
 INA226 INA(0x40); //address where of the INA internal chip for I2C 
 
-uint32_t counter = 0;
+typedef struct __attribute__((packed)) {
+  float r;
+  float v;
+  float i;
+} Packet;
+
+Packet p;
 
 void setup() {
   Serial.begin(115200); 
@@ -42,7 +48,6 @@ void setup() {
 void loop() {
   // Only send if connected
   if (Bluefruit.connected()) {
-    // Example data (replace with sensor data)
     float bv = INA.getBusVoltage();
     float cu = INA.getCurrent_mA();
     float res = 0;
@@ -54,13 +59,15 @@ void loop() {
     {
       res = -1;
     }
+    
+    p.r = res;
+    p.v = bv;
+    p.i = cu;
+  
 
-    String msg = "R:" + String(res, 3) + ",V:" + String(bv, 3) + ",I:" + String(cu, 3);
-
-    bleuart.print(msg); // Send over BLE
-    bleuart.println();
-    Serial.print(msg); // Debug
-    Serial.println();
+    bleuart.write((uint8_t*)&p, sizeof(p)); // Send over BLE
+    //Serial.print(msg); // Debug
+    //Serial.println();
     delay(500);
   }
 }
