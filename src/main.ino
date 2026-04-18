@@ -10,6 +10,7 @@ typedef struct __attribute__((packed)) {
   float r;
   float v;
   float i;
+  unsigned long timestamp = 0;
 } Packet;
 
 Packet p;
@@ -68,6 +69,7 @@ void loop() {
     bleuart.write((uint8_t*)&p, sizeof(p)); // Send over BLE
     //Serial.print(msg); // Debug
     //Serial.println();
-    delay(500);
+    delay(500); //waits 500 ms
+    p.timestamp += 0.5;
   }
 }
