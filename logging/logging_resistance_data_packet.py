@@ -13,9 +13,9 @@ log_file = "ble_log.txt"
 buffer =""
 
 def callback(sender, data):
-    if len(data) == 12:
-        r, v, i = struct.unpack("fff", data)
-        line = f"R:{r:.3f},V:{v:.3f},I:{i:.3f}"
+    if len(data) == 16:
+        r, v, i, t= struct.unpack("fffI", data)
+        line = f"T:{t}ms, R:{r:.3f},V:{v:.3f},I:{i:.3f}"
 
         print(line)
         with open(log_file, "a") as f:
