@@ -30,6 +30,9 @@ async def main():
         print("Logging started")
 
         while True:
+            if not client.is_connected:
+                print("Device Disconnected")
+                break
             await asyncio.sleep(1)
 
 asyncio.run(main())
