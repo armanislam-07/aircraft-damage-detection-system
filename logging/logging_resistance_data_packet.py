@@ -25,7 +25,7 @@ def callback(sender, data):
 async def main():
     with open(log_file, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerows(['Time (ms)', 'Resistance (Ohms)', 'Voltage (V)', 'Current (A)'])
+        writer.writerow(["Time (ms)", "Resistance (Ohms)", "Voltage (V)", "Current (A)"])
 
     async with BleakClient(DEVICE_ADDRESS) as client:
         print("Connected!")
