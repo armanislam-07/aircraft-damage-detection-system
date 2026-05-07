@@ -1,0 +1,14 @@
+make another circuit with breadboard testing single votlage supply (30 min ) 
+
+
+
+- use will 9v ad step dowon 
+
+
+
+currently it would be great if we can use one battery 
+
+
+figure out the turning off of the battery 
+	
+	off swtich for the battery 
