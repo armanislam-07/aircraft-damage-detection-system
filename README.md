@@ -1,53 +1,60 @@
-    
+# SMART MATERIALS for Self Sensing UAVS
 
-# SMART MATERIALS
+![Research Poster](img/poster.png)
+
+![Proof of Concept Prototype](img/POC.png)
+
+*Proof of Concept Prototype*
 
 ## Overview
 
-Smart materials or metamaterials are responsive substances designed to alter their properties in a controlled reversible manner. How does this relate to engineering? If we are able to control or understand how these properties change, we can use these materials as low cost sensors.
+Many materials exhibit intrinsic electro-mechanical coupling, meaning that simple electrical measurements can be used to infer stress, strain, damage, and structural health. Understanding and leveraging this coupling has transformative potential in biomedical technology, structural health monitoring, robotics, and geospatial imaging. This project specifically explores these properties for unmanned aerial vehicle (UAV) applications.
 
-In this project we explore the use of Carbon Nano Fibers (CNF) and Polylactic acid (PLA) for damage detection.
+## Why it Matters
 
-### Idea
+Unmanned aerial vehicles are rapidly expanding into critical applications including:
 
-When the material encounters stress, the resistance of the material changes. This project aims to detect the resistance change and map out how much damage the aircraft takes
+- Product delivery (consumer goods, medical supplies)
+- Infrastructure inspection (bridges, wind turbines, power lines)
+- Agriculture and crop assessment
+- Land surveying and mapping
+- Search and rescue operations
+- Military applications
 
-### Organization
-
-Update! The project has moved from the NRF24L01 to the NRF52840. This completely changes the archetecture of the project and the current organization will be as follows
-
--> logging
-    - Contains the python files neccesary for capturing the BLE signals that the NRF52840 transmits
--> src
-    - Contains the .ino and .cpp files necessary for the system
-        - Currently the system is designed in arduino and C++ but I am planning on transferring the codebase into C++ and Zephyr.
-
-### Materials
-
-- NRF52840
-- INA 226
-- CNF/PLA Sensors
+Traditional nondestructive evaluation (NDE) techniques are impractical for UAV fleets. These aircraft are too numerous and operate too frequently to cost-effectively inspect one-by-one for damage, signs of failure, or continued airworthiness. Embedded self-sensing has the potential to alleviate this problem by enabling continuous on-board assessment. By detecting overloads, cracks, and other failure precursors in real-time, we can determine whether a UAV remains fit for service without manual inspection.
 
 
+![Our Test Data Example](img/demo_data_analysis_example.png)
+*Example using data from our tests (drone_demo_tallman.txt)*
 
+## What We Did
 
+We additively manufactured UAV landing gear using carbon nanofiber (CNF) reinforced PLA filament and validated the material's sensing capabilities in real-world flight conditions. To evaluate structural deformation during operation, we designed a wireless data transmission system that calculates electrical resistance in real-time as the drone lands, providing immediate feedback on impact forces and potential damage. When the material encounters stress, the resistance of the material changes. In this instance, if the aircraft encounters a harsh landing, the overall resistance of the material increases.
 
+## System Architecture
 
+*** Block diagram will be added soon*
 
-### Archive Information of the old system
+> /src
+> Contains the .ino and .cpp files necessary for flashing onto board. The nRF52840 wireless transmits a data packet containing resistance, voltage, current, and timestamp values using BLE (polling ~100 ms)
+>
+>> main.ino 
+>>
+>
+> ---
+>
+> /logging
+> Contains the python and MATLAB files neccesary for capturing data packet.
+>
+>> logging_resistance_data_packet.py - Catches the data packet our board transmits and logs the data into a structured CSV file
+>>
+>> scanner.py - Scans all BLE devices in area and gives the devices address 
+>>
+>> analyzeLogData.m - Imports CSV data from our tests and plots figures to analyze the data
+>>
 
-#### Materials
+## Materials
 
-- NRF24L01
-- ATmega328p
-- INA 226
-- CNF/PLA Sensors
-
-#### System Design
-
-1. Home Base
-
-   - System on theh ground receiving data transmitted dfrom the drone about the resistance measurments and logs the data.
-2. Onboard Sensor System
-
-   - System on the drone calculating resistance values and transmitting them to home base.
+- nRF52840
+- INA226
+- Additively Manufactured CNF/PLA Landing Gears
