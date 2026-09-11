@@ -70,7 +70,7 @@ void loop() {
     bleuart.write((uint8_t*)&p, sizeof(p)); // Send over BLE
     //Serial.print(msg); // Debug
     //Serial.println();
-    delay(500); //waits 500 ms
+    delay(100); //waits 100 ms 
     
   }
 }
