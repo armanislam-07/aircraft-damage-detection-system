@@ -50,8 +50,13 @@ We additively manufactured UAV landing gear using carbon nanofiber (CNF) reinfor
 >
 > analyzeLogData.m - Imports CSV data from our tests and plots figures to analyze the data
 
+
 ## Materials
 
 - nRF52840
 - INA226
 - Additively Manufactured CNF/PLA Landing Gears
+
+### Why these Materials? 
+
+We utilized the nRF52840 since it focuses purely on BLE communciation. The INA was chosen for the easy to set up and grab circuit data. Other options could have included using a voltage divider or using a different microcontroller on board. 
